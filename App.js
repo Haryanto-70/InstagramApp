@@ -11,7 +11,18 @@ import {
 // Basic reusable components
 
 const Avatar = (props) => (
-  <Image style={styles.avatar} source={{ uri: props.url }} />
+  <View
+    style={{
+      backgroundColor: "#B4B4B3",
+      width: 100,
+      borderRadius: 10,
+      marginLeft: 8,
+      paddingTop: 8,
+    }}
+  >
+    <Image style={styles.avatar} source={{ uri: props.url }} />
+    <Text style={{ textAlign: "center", fontSize: 12 }}>Woofs</Text>
+  </View>
 );
 
 const Heading = (props) => <Text style={styles.heading}>{props.children}</Text>;
@@ -19,9 +30,31 @@ const Heading = (props) => <Text style={styles.heading}>{props.children}</Text>;
 const Title = (props) => <Text style={styles.title}>{props.children}</Text>;
 
 const styles = StyleSheet.create({
-  avatar: {},
-  heading: {},
-  title: {},
+  avatar: {
+    width: 80,
+    height: 80,
+    resizeMode: "stretch",
+    borderRadius: 50,
+    marginHorizontal: 10,
+  },
+  heading: {
+    width: "100%",
+    textAlign: "center",
+    backgroundColor: "white",
+    marginTop: "5%",
+    paddingTop: 32,
+    paddingBottom: 32,
+    fontSize: 32,
+  },
+  title: {
+    width: "100%",
+    textAlign: "center",
+    backgroundColor: "white",
+    marginTop: "5%",
+    paddingTop: 32,
+    paddingBottom: 32,
+    fontSize: 24,
+  },
 });
 
 // App-specific components
@@ -40,7 +73,7 @@ const woofCardStyles = StyleSheet.create({
 
 const WoofPost = (props) => (
   <View>
-    <Image source={{ uri: "todo" }} />
+    <Image style={styles.avatar} source={{ uri: props.url }} />
     <View>
       <Text>todo</Text>
       <Text>todo</Text>
@@ -59,15 +92,15 @@ const woofPostStyles = StyleSheet.create({
 // The screen rendering everything
 const HomeScreen = () => (
   <ScrollView>
-    <Heading>Generic heading</Heading>
-    <Avatar url="https://picsum.photos/64/64" />
-    <Image
-      source={{ uri: "https://picsum.photos/64/64" }}
-      width="70px"
-      height="70px"
-      alt="avatar"
+    <Heading>Trending Woofs</Heading>
+    <Avatar
+      url={
+        "https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=967&q=80"
+      }
     />
-    <Title>Generic title</Title>
+    <Title>New Post</Title>
+
+    <WoofPost url="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=967&q=80" />
   </ScrollView>
 );
 
