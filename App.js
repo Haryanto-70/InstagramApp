@@ -13,15 +13,16 @@ import {
 const Avatar = (props) => (
   <View
     style={{
+      width: 90,
       backgroundColor: "#B4B4B3",
-      width: 100,
-      borderRadius: 10,
       marginLeft: 8,
-      paddingTop: 8,
+      padding: 3,
+      borderRadius: 10,
+      borderColor: "#FAF9FA",
     }}
   >
     <Image style={styles.avatar} source={{ uri: props.url }} />
-    <Text style={{ textAlign: "center", fontSize: 12 }}>Woofs</Text>
+    <Text style={{ textAlign: "center" }}> {props.name}</Text>
   </View>
 );
 
@@ -31,76 +32,95 @@ const Title = (props) => <Text style={styles.title}>{props.children}</Text>;
 
 const styles = StyleSheet.create({
   avatar: {
-    width: 80,
-    height: 80,
-    resizeMode: "stretch",
+    width: 75,
+    height: 75,
+    margin: 4,
     borderRadius: 50,
-    marginHorizontal: 10,
+    borderColor: "white",
+    borderWidth: 2,
   },
   heading: {
     width: "100%",
     textAlign: "center",
-    backgroundColor: "white",
-    marginTop: "5%",
+    backgroundColor: "#B4B4B3",
+    marginTop: "12.5%",
+    marginBottom: 12,
     paddingTop: 32,
     paddingBottom: 32,
     fontSize: 32,
+    fontWeight: "700",
+    color: "white",
   },
   title: {
     width: "100%",
-    textAlign: "center",
-    backgroundColor: "white",
-    marginTop: "5%",
-    paddingTop: 32,
-    paddingBottom: 32,
-    fontSize: 24,
+    fontSize: 16,
+    marginLeft: 12,
+    marginTop: 12,
+    fontWeight: "800",
+    backgroundColor: "#F1EFEF",
+    padding: 8,
   },
 });
 
 // App-specific components
 
 const WoofCard = (props) => (
-  <View>
-    <Avatar />
-    <Title>Todo</Title>
+  <View style={woofCardStyles.card}>
+    <Image
+      style={{ width: 150, height: 100, borderRadius: 5 }}
+      source={{ uri: props.url }}
+    ></Image>
   </View>
 );
 
 const woofCardStyles = StyleSheet.create({
-  card: {},
-  title: {},
+  card: {
+    borderRadius: 10,
+    marginLeft: 8,
+    borderRadius: 5,
+  },
+  title: {
+    backgroundColor: "yellow",
+  },
 });
 
 const WoofPost = (props) => (
-  <View>
-    <Image style={styles.avatar} source={{ uri: props.url }} />
+  <View style={woofPostStyles.layout}>
+    <WoofCard url={props.url} />
     <View>
-      <Text>todo</Text>
-      <Text>todo</Text>
+      <Text style={woofPostStyles.title}>{props.title}</Text>
+      <Text style={woofPostStyles.description}>{props.description}</Text>
     </View>
   </View>
 );
 
 const woofPostStyles = StyleSheet.create({
-  layout: {},
+  layout: { flexDirection: "row", marginTop: 12 },
   image: {},
   content: {},
-  title: {},
-  description: {},
+  title: {
+    marginLeft: 8,
+    fontWeight: "700",
+  },
+  description: {
+    fontSize: 12,
+    width: "70%",
+    marginLeft: 8,
+  },
 });
 
 // The screen rendering everything
 const HomeScreen = () => (
   <ScrollView>
     <Heading>Trending Woofs</Heading>
-    <Avatar
-      url={
-        "https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=967&q=80"
-      }
-    />
-    <Title>New Post</Title>
+    <Avatar url={data.woofs[1].avatar} name={data.woofs[1].name} />
 
-    <WoofPost url="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=967&q=80" />
+    <Title>Woofs New Post</Title>
+    <WoofPost
+      url={data.posts[1].image}
+      title={data.posts[1].title}
+      description={data.posts[1].description}
+    />
   </ScrollView>
 );
 
